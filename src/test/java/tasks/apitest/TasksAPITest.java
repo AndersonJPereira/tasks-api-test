@@ -55,6 +55,7 @@ public class TasksAPITest {
 		.then()
 			.statusCode(400)
 			.log().all()
+			.body("error", Matchers.is("Bad Request"))
 			.body("message", Matchers.is("Due date must not be in past"))
 		;
 		
