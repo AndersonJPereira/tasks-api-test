@@ -1,5 +1,8 @@
 package tasks.apitest;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import org.hamcrest.Matchers;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -32,9 +35,11 @@ public class TasksAPITest {
 	
 	@Test
 	public void deveInserirTasks() {
+		LocalDate data = LocalDate.now();
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");		
 		RestAssured
 			.given()
-				.body("{\"task\": \"Estudar Devops\",\"dueDate\": \"2021-09-24\"}")
+				.body("{\"task\": \"Estudar Devops\",\"dueDate\":\""+data.format(formatter)+"\"}")
 			.when()
 				.post()
 			.then()
