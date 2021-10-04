@@ -19,8 +19,8 @@ import io.restassured.http.ContentType;
 public class TasksAPITest {
 	
 	@BeforeClass
-	public static void setup() throws UnknownHostException {
-		RestAssured.baseURI = "http://localhost:8001/tasks-backend";
+	public static void setup() {
+		RestAssured.baseURI = "http://localhost:9554/tasks-backend";
 		RestAssured.basePath = "/todo";
 		
 		RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
