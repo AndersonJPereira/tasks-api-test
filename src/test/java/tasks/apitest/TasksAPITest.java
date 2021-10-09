@@ -79,6 +79,32 @@ public class TasksAPITest {
 			;
 	}
 	
+	@Test
+	public void deveRemoverTasks() {
+		LocalDate data = LocalDate.now();
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");		
+		Integer idTask = RestAssured
+							.given()
+								.body("{\"task\": \"Estudar Pipeline\",\"dueDate\":\""+data.format(formatter)+"\"}")
+							.when()
+								.post()
+							.then()
+								.statusCode(201)
+								.log().all()
+								.body("task", Matchers.is("Estudar Pipeline"))
+								.extract().path("id")
+							;
+		RestAssured
+			.given()
+				.pathParam("id", idTask)
+			.when()
+				.delete("/{id}")
+			.then()
+				.statusCode(204)
+		;
+		
+	}
+	
 	
 	@Test
 	public void deveConsultarTasks() {
